@@ -11,6 +11,8 @@ Registro evolutivo das decisões arquiteturais focadas em Alta Disponibilidade, 
 - **Transparência de Dados**: Inclusão de disclaimer mandatório no README reforçando o caráter meramente ilustrativo do conteúdo (fotos/textos) para conformidade com portfólios públicos.
 - **Rebranding Descritivo**: Renomeação do projeto para `Interactive-Anniversary-Template` e ajuste da estrutura de pastas para refletir um padrão técnico e profissional.
 - **Documentação**: Atualização do README com guias de deploy para Netlify e estruturação técnica para recrutadores.
+- **Bug Fix (README)**: Correção do badge de deploy do Netlify que apresentava imagem quebrada; substituído pelo botão oficial de "Deploy to Netlify" com link parametrizado para o repositório atual.
+
 
 ## [Fase Final] - Alta Performance e Mobile-First
 - **Music Engine**: Substituição de embeds externos por um **Local Audio Engine**. Implementado listener global para contornar restrições de autoplay mobile.

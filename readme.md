@@ -2,10 +2,11 @@
 > [!IMPORTANT]
 > **Nota de Demonstração:** Todo o conteúdo deste repositório (fotos, vídeos, nomes e textos da carta) é meramente ilustrativo e serve apenas como exemplo de preenchimento para o template. Nenhuma informação contida aqui reflete pessoas ou eventos reais.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/deploy-status-badge.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/seu-usuario/seu-repositorio)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/raphael-c-martins/Interactive-Anniversary-Template)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Este é um projeto de código aberto desenvolvido para criar uma experiência digital memorável e interativa. Ideal para presentear alguém especial com um site elegante, moderno e cheio de carinho.
+
 
 ## 🌟 Funcionalidades de Destaque
 
@@ -13,7 +14,6 @@ Este é um projeto de código aberto desenvolvido para criar uma experiência di
 - **📸 Mural de Polaroides Dinâmico:** Galeria com Intersection Observer para animações de entrada fluidas.
 - **✨ Estética Glassmorphism:** Interface moderna com transparências e desfoque de fundo.
 - **🎵 Smart Audio Engine:** Sistema de áudio local com lógica de ativação inteligente para mobile.
-- **🖼️ Identidade Visual IA:** Favicon customizado gerado por IA para uma presença profissional no navegador.
 - **📱 Responsividade Total:** Design otimizado para Desktop, Tablet e Mobile.
 
 ## 🛠️ Tecnologias Utilizadas
