@@ -14,6 +14,8 @@ Registro evolutivo das decisões arquiteturais focadas em Alta Disponibilidade, 
 - **Bug Fix (README)**: Correção do badge de deploy do Netlify que apresentava imagem quebrada; substituído pelo botão oficial de "Deploy to Netlify" com link parametrizado para o repositório atual.
 - **Refatoração de Nomenclatura**: Remoção completa de todas as menções ao antigo nome "Jarvis" (Protocol/API) em todos os arquivos (`README.md`, `main.js`, `server.py`, `.bat`), substituindo por termos genéricos como "Local Dev" para melhor adequação Open Source.
 - **Limpeza de Workspace**: Remoção de arquivos residuais e inúteis (`]`) para manter o repositório leve e organizado.
+- **Visual Evidence**: Inclusão de link direto para a demonstração ao vivo no Netlify no topo do README.
+
 
 
 

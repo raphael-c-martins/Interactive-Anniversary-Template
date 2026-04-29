@@ -5,7 +5,10 @@
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/raphael-c-martins/Interactive-Anniversary-Template)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+🚀 **[Visualize o Projeto em Execução](https://interactive-anniversary-template.netlify.app/)**
+
 Este é um projeto de código aberto desenvolvido para criar uma experiência digital memorável e interativa. Ideal para presentear alguém especial com um site elegante, moderno e cheio de carinho.
+
 
 
 ## 🌟 Funcionalidades de Destaque
