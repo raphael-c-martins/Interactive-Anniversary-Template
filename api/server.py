@@ -81,6 +81,6 @@ if __name__ == '__main__':
     server_address = ('', 8001)
     httpd = HTTPServer(server_address, BirthdayHandler)
     print(f"==================================================")
-    print(f"🚀 Servidor Jarvis API Rodando na porta 8001")
+    print(f"🚀 Servidor Local API Rodando na porta 8001")
     print(f"==================================================")
     httpd.serve_forever()

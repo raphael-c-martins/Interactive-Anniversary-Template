@@ -19,7 +19,7 @@ Este é um projeto de código aberto desenvolvido para criar uma experiência di
 ## 🛠️ Tecnologias Utilizadas
 
 - **Frontend:** HTML5, CSS3 (Vanilla), JavaScript (ES6+).
-- **Backend (Opcional/Local):** Python (para edição dinâmica de legendas via Jarvis Protocol).
+- **Backend (Opcional/Local):** Python (para edição dinâmica de legendas via Local Dev Protocol).
 - **Hospedagem:** Recomendado Netlify ou GitHub Pages.
 
 ## 🎨 Como Customizar

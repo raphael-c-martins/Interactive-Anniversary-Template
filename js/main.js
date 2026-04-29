@@ -1,5 +1,5 @@
 /**
- * Motor Interativo do Projeto Aniversário (Jarvis Protocol)
+ * Motor Interativo do Projeto Aniversário (Local Dev Engine)
  * Foco: Alta Disponibilidade UI, Organização Modular e UX Fluida.
  */
 
