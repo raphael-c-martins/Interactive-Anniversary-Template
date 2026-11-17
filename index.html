@@ -25,48 +25,8 @@
         <source src="./music/musica.mp3" type="audio/mpeg">
     </audio>
 
-    <div class="music-player" id="music-player" role="region" aria-label="Controle de música de fundo">
-        <!-- Popover de Volume (transitions-dev: Menu dropdown) -->
-        <div class="volume-popover t-dropdown" id="volume-popover" data-origin="bottom-right" role="dialog" aria-label="Ajuste de volume da música" aria-hidden="true">
-            <div class="volume-popover-header">
-                <span class="volume-label">Volume</span>
-                <span class="volume-value" id="volume-value">15%</span>
-                <button type="button" class="volume-mute-btn" id="volume-mute-btn" aria-label="Silenciar música" aria-pressed="false" title="Silenciar ou reativar">
-                    <span class="t-icon-swap" id="mute-icon-swap" data-state="a" aria-hidden="true">
-                        <span class="t-icon" data-icon="a">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                        </span>
-                        <span class="t-icon" data-icon="b">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-                        </span>
-                    </span>
-                </button>
-            </div>
-            <div class="volume-controls-row">
-                <button type="button" class="volume-step-btn" id="volume-down" aria-label="Abaixar volume">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                </button>
-                <input
-                    type="range"
-                    id="volume-slider"
-                    class="volume-slider"
-                    min="0"
-                    max="100"
-                    step="5"
-                    value="15"
-                    aria-label="Volume da música"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    aria-valuenow="15"
-                />
-                <button type="button" class="volume-step-btn" id="volume-up" aria-label="Aumentar volume">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Pílula Compacta do Player -->
-        <div class="music-pill">
+    <div class="music-player" id="music-player" data-vol-open="false" role="region" aria-label="Controle de música de fundo">
+        <div class="music-bar">
             <button type="button" id="music-toggle" class="music-pill-btn music-toggle-btn" aria-label="Tocar música" aria-pressed="false">
                 <span class="t-icon-swap" id="music-icon-swap" data-state="a" aria-hidden="true">
                     <span class="t-icon" data-icon="a">
@@ -78,7 +38,7 @@
                 </span>
             </button>
             <span class="music-pill-divider" aria-hidden="true"></span>
-            <button type="button" id="volume-toggle" class="music-pill-btn volume-toggle-btn" aria-label="Ajustar volume da música" aria-expanded="false" aria-controls="volume-popover">
+            <button type="button" id="volume-toggle" class="music-pill-btn volume-toggle-btn" aria-label="Ajustar volume da música" aria-expanded="false" aria-controls="volume-drawer">
                 <span class="t-icon-swap" id="pill-volume-icon-swap" data-state="a" aria-hidden="true">
                     <span class="t-icon" data-icon="a">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
@@ -88,6 +48,34 @@
                     </span>
                 </span>
             </button>
+
+            <div class="volume-drawer-wrap" id="volume-drawer" aria-hidden="true">
+                <div class="volume-drawer-inner">
+                    <button type="button" class="volume-step-btn" id="volume-down" aria-label="Abaixar volume">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <input
+                        type="range"
+                        id="volume-slider"
+                        class="volume-slider"
+                        min="0"
+                        max="100"
+                        step="5"
+                        value="15"
+                        aria-label="Volume da música"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="15"
+                    />
+                    <button type="button" class="volume-step-btn" id="volume-up" aria-label="Aumentar volume">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <span class="volume-value" id="volume-value">15%</span>
+                    <button type="button" class="volume-collapse-btn" id="volume-collapse" aria-label="Recolher controle de volume" title="Recolher">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 

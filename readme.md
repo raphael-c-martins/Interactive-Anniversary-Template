@@ -16,7 +16,7 @@ Este é um projeto de código aberto desenvolvido para criar uma experiência di
 - **💌 Envelope Interativo 3D:** Experiência de abertura em CSS 3D com ajuste automático de altura para nunca sobrepor o cabeçalho em telas grandes ou pequenas.
 - **📸 Mural de Polaroides Dinâmico:** Galeria responsiva com revelação em cascata ao rolar (`IntersectionObserver`), inclinação 3D interativa no ponteiro e adaptação limpa para celular.
 - **✨ Estética Glassmorphism & Motion Tokens:** Fundo radial animado, transições coordenadas com respeito a `prefers-reduced-motion` e tipografia fluida.
-- **🎵 Player de Música com Controle de Volume:** Reprodução local que inicia em volume baixo (`15%`) com entrada suave, além de controle de volume (`-` / `+`, barra deslizante e silenciar) salvo no navegador.
+- **🎵 Player de Música com Controle de Volume:** Inicia em volume baixo (`15%`) com entrada suave. No desktop, expande controles na horizontal (`-` / `+`, barra deslizante e silenciar); no celular, mantém apenas o botão discreto de *play/pause* com aviso temporário para ajustar pelo próprio aparelho.
 - **📱 Responsividade Total:** Testado de telas pequenas (`320px`) até monitores Full HD (`1920px`), com alvos de toque de `44x44px` e navegação por teclado (`Esc` para fechar).
 
 ## 🛠️ Tecnologias Utilizadas

@@ -242,11 +242,11 @@ const setupEnvelope = () => {
         const vh = window.innerHeight || 800;
         const isSmall = window.innerWidth <= 640;
 
-        // Em telas pequenas a largura aberta expande; estimamos com margem segura
+        // Em telas pequenas a carta cresce o suficiente para mostrar o texto sem corte interno
         const maxPaperH = isSmall
-            ? Math.min(460, Math.round(vh * 0.62))
+            ? Math.min(720, Math.max(480, Math.round(vh * 0.86)))
             : Math.min(680, Math.round(vh * 0.74));
-        const minPaperH = Math.max(envH + 72, isSmall ? 330 : 420);
+        const minPaperH = Math.max(envH + 72, isSmall ? 340 : 420);
 
         const cs = getComputedStyle(letterPaper);
         const padV = (parseFloat(cs.paddingTop) || 40) + (parseFloat(cs.paddingBottom) || 24);
@@ -314,8 +314,9 @@ const setupEnvelope = () => {
     }
 
     document.addEventListener('keydown', (e) => {
-        const volPop = document.getElementById('volume-popover');
-        if (e.key === 'Escape' && !volPop?.classList.contains('is-open') && envelope.classList.contains('open')) {
+        const player = document.getElementById('music-player');
+        const volDrawerOpen = window.innerWidth > 768 && player?.getAttribute('data-vol-open') === 'true';
+        if (e.key === 'Escape' && !volDrawerOpen && envelope.classList.contains('open')) {
             setOpen(false);
             envelope.focus();
         }
@@ -415,7 +416,7 @@ const EmojiRain = (() => {
     return { init };
 })();
 
-// 6. Mini Player de Música com Volume Baixo Inicial, Fade-in e Popover de Controle
+// 6. Mini Player de Música com Volume Baixo Inicial, Fade-in e Dock/Drawer Responsivo
 const MusicPlayer = (() => {
     const STORAGE_KEY = 'iat_music_volume';
     const DEFAULT_VOLUME = 0.15;
@@ -423,10 +424,11 @@ const MusicPlayer = (() => {
     const FADE_IN_MS = 700;
 
     let audio, playerRoot, toggleBtn, musicIconSwap;
-    let volumeBtn, pillVolumeIconSwap, popover;
-    let slider, volumeValueEl, muteBtn, muteIconSwap, downBtn, upBtn;
+    let volumeBtn, pillVolumeIconSwap, drawer;
+    let slider, volumeValueEl, collapseBtn, downBtn, upBtn;
 
     let started = false;
+    let shownMobileVolumeHint = false;
     let targetVolume = DEFAULT_VOLUME;
     let lastNonZeroVolume = DEFAULT_VOLUME;
     let isMuted = false;
@@ -434,8 +436,9 @@ const MusicPlayer = (() => {
     let audioCtx = null;
     let gainNode = null;
     let fadeRaf = null;
-    let popoverOpen = false;
-    let closeTimer = null;
+    let drawerOpen = false;
+
+    const isDockLayout = () => window.innerWidth <= 768;
 
     const clampVol = (v) => Math.min(1, Math.max(0, Number.isFinite(v) ? v : DEFAULT_VOLUME));
 
@@ -544,14 +547,25 @@ const MusicPlayer = (() => {
         }
 
         const mutedState = isMuted || effectiveVol === 0;
-        if (muteBtn) {
-            muteBtn.setAttribute('aria-pressed', String(mutedState));
-            muteBtn.setAttribute('aria-label', mutedState ? 'Reativar som' : 'Silenciar música');
-        }
-
         const swapVal = mutedState ? 'b' : 'a';
-        if (muteIconSwap) muteIconSwap.dataset.state = swapVal;
         if (pillVolumeIconSwap) pillVolumeIconSwap.dataset.state = swapVal;
+        syncVolumeToggleAttrs();
+    };
+
+    const syncVolumeToggleAttrs = () => {
+        if (!volumeBtn || !drawer) return;
+        const mutedState = isMuted || targetVolume === 0;
+        if (isDockLayout() || drawerOpen) {
+            volumeBtn.setAttribute('aria-pressed', String(mutedState));
+            volumeBtn.setAttribute('aria-label', mutedState ? 'Reativar som' : 'Silenciar música');
+            volumeBtn.setAttribute('aria-expanded', isDockLayout() ? 'true' : String(drawerOpen));
+            drawer.setAttribute('aria-hidden', 'false');
+        } else {
+            volumeBtn.removeAttribute('aria-pressed');
+            volumeBtn.setAttribute('aria-expanded', 'false');
+            volumeBtn.setAttribute('aria-label', 'Ajustar volume da música');
+            drawer.setAttribute('aria-hidden', 'true');
+        }
     };
 
     const updatePlayUI = (playing) => {
@@ -611,6 +625,10 @@ const MusicPlayer = (() => {
         return audio.play().then(() => {
             updatePlayUI(true);
             fadeOutputTo(destLevel);
+            if (isDockLayout() && !shownMobileVolumeHint && !isMuted) {
+                shownMobileVolumeHint = true;
+                Toast.show('Música em volume baixo — ajuste pelo botão do celular', 'info', 5000);
+            }
             return true;
         }).catch(() => {
             applyOutputLevel(destLevel);
@@ -635,36 +653,11 @@ const MusicPlayer = (() => {
         }
     };
 
-    const getDropdownCloseMs = () => {
-        const raw = getComputedStyle(document.documentElement).getPropertyValue('--dropdown-close-dur');
-        return parseFloat(raw) || 150;
-    };
-
-    const setPopoverOpen = (open) => {
-        if (!popover || !volumeBtn) return;
-        if (popoverOpen === open) return;
-
-        popoverOpen = open;
-        if (closeTimer) {
-            clearTimeout(closeTimer);
-            closeTimer = null;
-        }
-
-        if (open) {
-            popover.classList.remove('is-closing');
-            popover.classList.add('is-open');
-            popover.setAttribute('aria-hidden', 'false');
-            volumeBtn.setAttribute('aria-expanded', 'true');
-        } else {
-            popover.classList.remove('is-open');
-            popover.classList.add('is-closing');
-            popover.setAttribute('aria-hidden', 'true');
-            volumeBtn.setAttribute('aria-expanded', 'false');
-            closeTimer = setTimeout(() => {
-                popover.classList.remove('is-closing');
-                closeTimer = null;
-            }, getDropdownCloseMs());
-        }
+    const setDrawerOpen = (open) => {
+        if (!playerRoot || !drawer || !volumeBtn) return;
+        drawerOpen = Boolean(open);
+        playerRoot.setAttribute('data-vol-open', String(drawerOpen));
+        syncVolumeToggleAttrs();
     };
 
     const detachAutoplayListeners = () => {
@@ -692,11 +685,10 @@ const MusicPlayer = (() => {
         musicIconSwap = document.getElementById('music-icon-swap');
         volumeBtn = document.getElementById('volume-toggle');
         pillVolumeIconSwap = document.getElementById('pill-volume-icon-swap');
-        popover = document.getElementById('volume-popover');
+        drawer = document.getElementById('volume-drawer');
         slider = document.getElementById('volume-slider');
         volumeValueEl = document.getElementById('volume-value');
-        muteBtn = document.getElementById('volume-mute-btn');
-        muteIconSwap = document.getElementById('mute-icon-swap');
+        collapseBtn = document.getElementById('volume-collapse');
         downBtn = document.getElementById('volume-down');
         upBtn = document.getElementById('volume-up');
 
@@ -722,10 +714,22 @@ const MusicPlayer = (() => {
             togglePlay();
         });
 
-        if (volumeBtn && popover) {
+        if (volumeBtn && drawer) {
             volumeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                setPopoverOpen(!popoverOpen);
+                if (isDockLayout() || drawerOpen) {
+                    toggleMute();
+                } else {
+                    setDrawerOpen(true);
+                }
+            });
+        }
+
+        if (collapseBtn) {
+            collapseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setDrawerOpen(false);
+                if (volumeBtn) volumeBtn.focus();
             });
         }
 
@@ -754,25 +758,20 @@ const MusicPlayer = (() => {
             });
         }
 
-        if (muteBtn) {
-            muteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleMute();
-            });
-        }
-
         document.addEventListener('click', (e) => {
-            if (popoverOpen && playerRoot && !playerRoot.contains(e.target)) {
-                setPopoverOpen(false);
+            if (!isDockLayout() && drawerOpen && playerRoot && !playerRoot.contains(e.target)) {
+                setDrawerOpen(false);
             }
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && popoverOpen) {
-                setPopoverOpen(false);
+            if (!isDockLayout() && e.key === 'Escape' && drawerOpen) {
+                setDrawerOpen(false);
                 if (volumeBtn) volumeBtn.focus();
             }
         });
+
+        window.addEventListener('resize', syncVolumeToggleAttrs);
 
         document.addEventListener('pointerdown', autoplayOnFirstTouch, { passive: true });
         document.addEventListener('keydown', autoplayOnFirstTouch, { passive: true });
