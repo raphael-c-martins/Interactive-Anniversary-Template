@@ -9,7 +9,15 @@
 
 Este é um projeto de código aberto desenvolvido para criar uma experiência digital memorável e interativa. Ideal para presentear alguém especial com um site elegante, moderno e cheio de carinho.
 
+## 📸 Capturas da Interface
 
+| Envelope fechado e controles de áudio | Carta aberta e mensagem interativa |
+| :---: | :---: |
+| ![Envelope interativo em 3D com pílula de áudio](docs/screenshots/iat1.png) | ![Carta aberta sem sobrepor o título principal](docs/screenshots/iat2.png) |
+
+| Mural dinâmico de polaroides | Experiência responsiva em dispositivos móveis |
+| :---: | :---: |
+| ![Mural de memórias com cards em formato polaroide](docs/screenshots/iat3.png) | ![Visualização responsiva em telas móveis](docs/screenshots/iat4.png) |
 
 ## 🌟 Funcionalidades de Destaque
 

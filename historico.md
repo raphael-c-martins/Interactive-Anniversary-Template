@@ -4,6 +4,9 @@ Registro evolutivo das decisões arquiteturais focadas em Alta Disponibilidade, 
 
 > **Diretriz de Preservação:** Em manutenções e atualizações deste projeto, **nunca apagar logs persistentes ou resetar bancos de dados** (caso integrações locais ou futuras estejam ativas).
 
+## [17/11/2026] - Capturas da Interface no README.md
+- **Evidência Visual da Versão Atual (`docs/screenshots/iat1.png`–`iat4.png`):** Inclusão da seção `## 📸 Capturas da Interface` em grade 2×2 no `readme.md` com capturas geradas após a refatoração visual de 17/11/2026 (envelope com pílula compacta de áudio, carta aberta abaixo do título principal, mural de 6 polaroides e composição móvel responsiva).
+
 ## [17/11/2026] - Refino de Áudio, Responsividade e Animações
 - **Controle de Áudio e Volume Inicial Baixo:** Volume inicial reduzido de 100% para `15%` com entrada suave (*fade-in* de `700ms`), persistência local no navegador (`localStorage`) e suporte alternativo via *Web Audio API* (`GainNode`) para dispositivos que bloqueiam escrita em `audio.volume` (como iOS Safari).
 - **Mini Player Adaptativo (Desktop vs Mobile):** No desktop (`> 768px`), pílula compacta com gaveta horizontal expansível (`-`, `+`, barra deslizante, silenciar e recolher). No celular (`<= 768px`), permanece apenas o botão circular discreto de *play/pause* sem cobrir fotos nem legendas, acompanhado de notificação temporária (`Toast`) avisando para ajustar o volume pelos botões do próprio aparelho.
