@@ -13,11 +13,11 @@ Este é um projeto de código aberto desenvolvido para criar uma experiência di
 
 ## 🌟 Funcionalidades de Destaque
 
-- **💌 Envelope Interativo 3D:** Experiência de "unboxing" digital implementada puramente com CSS.
-- **📸 Mural de Polaroides Dinâmico:** Galeria com Intersection Observer para animações de entrada fluidas.
-- **✨ Estética Glassmorphism:** Interface moderna com transparências e desfoque de fundo.
-- **🎵 Smart Audio Engine:** Sistema de áudio local com lógica de ativação inteligente para mobile.
-- **📱 Responsividade Total:** Design otimizado para Desktop, Tablet e Mobile.
+- **💌 Envelope Interativo 3D:** Experiência de abertura em CSS 3D com ajuste automático de altura para nunca sobrepor o cabeçalho em telas grandes ou pequenas.
+- **📸 Mural de Polaroides Dinâmico:** Galeria responsiva com revelação em cascata ao rolar (`IntersectionObserver`), inclinação 3D interativa no ponteiro e adaptação limpa para celular.
+- **✨ Estética Glassmorphism & Motion Tokens:** Fundo radial animado, transições coordenadas com respeito a `prefers-reduced-motion` e tipografia fluida.
+- **🎵 Player de Música com Controle de Volume:** Reprodução local que inicia em volume baixo (`15%`) com entrada suave, além de controle de volume (`-` / `+`, barra deslizante e silenciar) salvo no navegador.
+- **📱 Responsividade Total:** Testado de telas pequenas (`320px`) até monitores Full HD (`1920px`), com alvos de toque de `44x44px` e navegação por teclado (`Esc` para fechar).
 
 ## 🛠️ Tecnologias Utilizadas
 

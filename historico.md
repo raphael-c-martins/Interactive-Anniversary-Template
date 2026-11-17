@@ -2,6 +2,17 @@
 
 Registro evolutivo das decisões arquiteturais focadas em Alta Disponibilidade, Segurança e UX de Alta Densidade.
 
+> **Diretriz de Preservação:** Em manutenções e atualizações deste projeto, **nunca apagar logs persistentes ou resetar bancos de dados** (caso integrações locais ou futuras estejam ativas).
+
+## [17/11/2026] - Refino de Áudio, Responsividade e Animações
+- **Controle de Áudio e Volume Inicial Baixo:** Volume inicial reduzido de 100% para `15%` com entrada suave (*fade-in* de `700ms`), persistência local no navegador (`localStorage`) e suporte alternativo via *Web Audio API* (`GainNode`) para dispositivos que bloqueiam escrita em `audio.volume` (como iOS Safari).
+- **Mini Player Expansível:** Substituição do botão simples por pílula acessível (`44x44px`) com troca animada de ícones e painel de volume contendo barra deslizante, botões `-`/`+` e silenciar/reativar, fechando ao clicar fora ou pressionar `Esc`.
+- **Correções de Responsividade (320px a 1920px):**
+  - Cálculo dinâmico da abertura da carta e espaçamento superior da seção para que a folha aberta nunca cubra o título `"Um Dia Especial"` em nenhuma resolução.
+  - Remoção de `<div>` excedente no `index.html`, desativação de `contenteditable` em leitura para evitar abertura acidental do teclado no celular e sincronia da pauta do papel via `background-attachment: local` com `--paper-line-h`.
+  - Ajuste do mural de polaroides para largura fluida (`min(280px, calc(100vw - 3.25rem))`), espaçamento inferior seguro acima do player flutuante e redução das rotações extremas em telas menores.
+- **Sistema de Animações e Acessibilidade:** Padronização com *motion tokens* (`--duration-*`, `--ease-*`, `--blur-*`), revelação escalonada nos títulos, inclinação 3D suave nas polaroides para mouse, eliminação de `transition: all`, ativação do fundo radial ambiente e cobertura integral de `@media (prefers-reduced-motion: reduce)` (inclusive pausando partículas quando a aba fica oculta).
+
 ## [Fase de Distribuição] - GitHub & Netlify Ready
 - **Sanitização de Código**: Remoção de dados sensíveis e referências pessoais para publicação em portfólio público.
 - **Configuração de Ambiente**: Criação de `.gitignore` e `LICENSE` (MIT) para padronização Open Source.
